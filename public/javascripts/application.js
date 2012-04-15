@@ -79,10 +79,35 @@ var Mwnw = {
     context.lineTo(closeX, closeY);
     context.closePath();
     context.stroke();
+  },
+  connectToStream: function() {
+    var source = new EventSource('/sse_endpoint');
+
+    source.addEventListener('answer', function(e) {
+      console.log(e.data);
+    }, false);
+
+    source.addEventListener('drawline', function(e) {
+      console.log(e.data);
+    }, false);
+
+    source.addEventListener('open', function(e) {
+      // Connection was opened.
+      console.log("connection opened");
+    }, false);
+
+    source.addEventListener('error', function(e) {
+      console.log(e);
+      if (e.eventPhase == EventSource.CLOSED) {
+        // Connection was closed.
+        console.log("connection closed")
+      }
+    }, false);
   }
 }
 
 window.onload = function(){
   Mwnw.addCanvas();
   Mwnw.captureMouseEvents();
+  Mwnw.connectToStream();
 }

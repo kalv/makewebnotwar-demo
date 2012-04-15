@@ -1,18 +1,6 @@
 require 'rubygems'
 require 'bundler/setup'
 
-require 'rack'
-
-use Rack::Static, :urls => ['/stylesheets', '/images', '/javascripts'], :root => "public"
-run Rack::Directory.new("public")
-
-run lambda { |env|
-  [
-    200,
-    {
-      'Content-Type'  => 'text/html',
-      'Cache-Control' => 'public, max-age=86400'
-    },
-    File.open('public/index.html', File::RDONLY)
-  ]
-}
+require 'sinatra'
+require File.expand_path('../app', __FILE__)
+run Sinatra::Application
