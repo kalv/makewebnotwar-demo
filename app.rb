@@ -15,10 +15,10 @@ get "/sse_endpoint" do
   }
 end
 
-get '/send_to_sse' do
+post '/drawlines' do
   # write to all open streams
   connections.each {|out|
-    out << ["event:answer", "data:#{params[:message]}\n\n"].join("\n")
+    out << ["event:drawlines", "data:#{params[:lines]}\n\n"].join("\n")
   }
   "message sent"
 end
