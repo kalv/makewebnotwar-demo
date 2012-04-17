@@ -16,7 +16,7 @@ var Stream = {
   // Only listen to answers from Server sent events
   listenForAnswers: function() {
     eventSource.addEventListener('answer', function(e) {
-      console.log(e.data);
+      $("#answers").append("<p>"+e.data+"</p>");
     }, false);
   },
   // Listen and handle new lines drawn

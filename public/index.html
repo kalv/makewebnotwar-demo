@@ -14,15 +14,18 @@
         $("#draw").click(function() {
           Mwnw.addCanvas();
           Mwnw.captureMouseEvents();
-          Mwnw.connectToStream();
-          Mwnw.listenForAnswers();
+          Stream.connect();
+          Stream.listenForAnswers();
           $("#playOptions").hide();
         });
         $("#guess").click(function() {
           Mwnw.addCanvas();
-          Mwnw.connectToStream();
-          Mwnw.listenForNewLines();
+          Stream.connect();
+          Stream.listenForNewLines();
+          Stream.listenForAnswers();
           $("#playOptions").hide();
+          $("#submitAnswer").show();
+          Mwnw.ajaxifyForm($("#submitAnswer form"));
         });
       });
     </script>
@@ -39,6 +42,14 @@
         <h2>What do you want to do today?</h2>
         <a id="draw" href="#">Draw</a>
         <a id="guess" href="#">Guess</a>
+      </div>
+      <div id="answers">
+      </div>
+      <div id="submitAnswer">
+        <form action="/answer" method="post">
+          <input type="text" name="answer"/>
+          <input type="submit" value="Guess"/>
+        </form>
       </div>
     </div>
   </body>

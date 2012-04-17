@@ -82,5 +82,11 @@ var Mwnw = {
     context.lineTo(closeX, closeY);
     context.closePath();
     context.stroke();
+  },
+  ajaxifyForm: function(element) {
+    element.submit(function() {
+      $.post("/answers", {answer: $("input[type='text']", this).val()});
+      return false;
+    });
   }
 }

@@ -20,3 +20,10 @@ post '/drawlines' do
   }
   "message sent"
 end
+
+post '/answers' do
+  connections.each {|out|
+    out << "event:answer\ndata:#{params[:answer]}\n\n"
+  }
+  "message sent"
+end
