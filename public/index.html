@@ -5,8 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <script src="javascripts/jquery-1.7.2.min.js"></script>
     <script src="javascripts/application.js"></script>
+    <script src="javascripts/connection.js"></script>
     <link rel="stylesheet" href="stylesheets/style.css" type="text/css" />
     <title>Make web not war app</title>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $("#draw").click(function() {
+          Mwnw.addCanvas();
+          Mwnw.captureMouseEvents();
+          Mwnw.connectToStream();
+          Mwnw.listenForAnswers();
+          $("#playOptions").hide();
+        });
+        $("#guess").click(function() {
+          Mwnw.addCanvas();
+          Mwnw.connectToStream();
+          Mwnw.listenForNewLines();
+          $("#playOptions").hide();
+        });
+      });
+    </script>
   </head>
 
   <body>
