@@ -4,8 +4,8 @@
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <script src="javascripts/jquery-1.7.2.min.js"></script>
-    <script src="javascripts/application.js"></script>
-    <script src="javascripts/connection.js"></script>
+    <script src="javascripts/makewebnotwar.js"></script>
+    <script src="javascripts/stream.js"></script>
     <link rel="stylesheet" href="stylesheets/style.css" type="text/css" />
     <title>Make web not war app</title>
 
@@ -14,13 +14,16 @@
         $("#draw").click(function() {
           Mwnw.addCanvas();
           Mwnw.captureMouseEvents();
+          // Demonstrate Connections
           Stream.connect();
+          // Listening to only answer events
           Stream.listenForAnswers();
           $("#playOptions").hide();
         });
         $("#guess").click(function() {
           Mwnw.addCanvas();
           Stream.connect();
+          // Listening to New lines
           Stream.listenForNewLines();
           Stream.listenForAnswers();
           $("#playOptions").hide();

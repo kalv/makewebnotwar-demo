@@ -1,4 +1,5 @@
 var Stream = {
+
   // Connect to the Event source & Handle generic events
   connect: function() {
     eventSource = new EventSource('/sse_endpoint');
@@ -13,12 +14,14 @@ var Stream = {
       }
     }, false);
   },
+
   // Only listen to answers from Server sent events
   listenForAnswers: function() {
     eventSource.addEventListener('answer', function(e) {
       $("#answers").append("<p>"+e.data+"</p>");
     }, false);
   },
+
   // Listen and handle new lines drawn
   listenForNewLines: function() {
     eventSource.addEventListener('drawlines', function(e) {
@@ -29,6 +32,7 @@ var Stream = {
       };
     }, false);
   },
+
   // Send lines to server
   sendLinesDrawnToServer: function() {
     $.post("/drawlines", {lines: JSON.stringify(Mwnw.linesDrawn)});
